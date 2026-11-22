@@ -101,7 +101,7 @@
   --shadow:0 13px 34px -19px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"Source Sans 3","Source Sans Pro",system-ui,sans-serif;font-size:17px;line-height:1.6;padding-bottom:74px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Source Sans 3","Source Sans Pro",system-ui,sans-serif;font-size:17px;line-height:1.6;padding-bottom:calc(76px + env(safe-area-inset-bottom));overflow-x:clip}
 @media(min-width:760px){body{padding-bottom:0}}
 h1,h2,h3,.display{font-family:"Dosis",sans-serif;text-transform:uppercase;letter-spacing:.05em;line-height:1.08;margin:0;font-weight:600}
 a{color:inherit} img{max-width:100%;display:block}
@@ -401,8 +401,8 @@ body.showing-artist #artist-pages{display:block}
 }
 
 /* Mobile sticky bar */
-.mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.98);border-top:2px solid var(--sage-line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
-.mobilebar a{text-decoration:none;text-align:center;font-family:"Dosis",sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 2px;border-radius:5px;color:var(--ink)}
+.mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.98);border-top:2px solid var(--sage-line);display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.mobilebar a{text-decoration:none;text-align:center;font-family:"Dosis",sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 2px;border-radius:5px;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52px}
 .mobilebar a.primary{background:var(--od-btn);color:var(--bone)}
 .mobilebar a span{display:block;font-size:18px;line-height:1.1}
 @media(min-width:760px){.mobilebar{display:none}}
@@ -452,7 +452,7 @@ input.invalid,textarea.invalid{border-color:#7A2E1D;outline:2px solid rgba(122,4
 .artist-bookbar .abb-name small{display:block;color:var(--muted);font-weight:600;font-size:12.5px}
 .artist-bookbar .btn{flex:none}
 @media(min-width:760px){.artist-bookbar{bottom:0;justify-content:center}.artist-bookbar .abb-name{flex:none}}
-body.showing-artist{padding-bottom:132px}
+body.showing-artist{padding-bottom:calc(140px + env(safe-area-inset-bottom))}
 @media(min-width:760px){body.showing-artist{padding-bottom:74px}}
 .back-top{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
 .skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--ink);color:var(--bone);padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none}
@@ -686,6 +686,18 @@ section[id]{scroll-margin-top:70px}
   .hero-strip{order:13}
 }
 
+/* ===== Post-launch polish (2026-11-21) — phone readability pass:
+   no body copy under 16px on small screens, section headings step
+   down cleanly, and form fields sit at 16px so iOS doesn't zoom
+   on focus. Desktop is untouched. ===== */
+@media(max-width:759px){
+  .qs p{font-size:16px}
+  .step p{font-size:16px}
+  .sec-head h2{font-size:29px}
+  .panel h3,.ppanel h3{font-size:22px}
+  input,select,textarea{font-size:16px}
+}
+
 </style>
 </head>
 <body>
@@ -756,10 +768,10 @@ section[id]{scroll-margin-top:70px}
       <span class="badge">Free Consults — No Pressure</span>
       <span class="badge">Walk-Ins Welcome</span>
     </div>
-    <p class="fine hero-fine" style="margin-top:16px">T is booking <strong style="color:#fff">Dec / Jan</strong> right now. The crew books sooner — and walk-in chairs open up most days. No appointment needed for a consult, ever: walk in and we do it on the spot.</p>
+    <p class="fine hero-fine" style="margin-top:16px">T is booking <strong style="color:#fff">Jan / Feb</strong> right now. The crew books sooner — and walk-in chairs open up most days. No appointment needed for a consult, ever: walk in and we do it on the spot.</p>
    </div>
     <figure id="heroPhoto" hidden>
-      <img id="heroPhotoImg" alt="" width="1320" height="1980" decoding="async">
+      <img id="heroPhotoImg" alt="" width="1320" height="1980" decoding="async" loading="eager" fetchpriority="high">
       <figcaption id="heroPhotoCap"></figcaption>
     </figure>
     <div class="hero-strip" id="heroStrip" aria-label="Recent work from the crew">
@@ -777,7 +789,7 @@ section[id]{scroll-margin-top:70px}
 <div class="quicksteps"><div class="wrap qs-in">
   <div class="qs"><div class="num">01</div><div><h3>Just walk in</h3><p>No appointment needed to talk. Come in, look around, check the flash wall — we'll handle the rest.</p></div></div>
   <div class="qs"><div class="num">02</div><div><h3>Consult happens right then</h3><p>Same visit, face to face: your idea, honest advice, a real price range and a rough time. Free, about 15–20 minutes.</p></div></div>
-  <div class="qs"><div class="num">03</div><div><h3>Deposit locks your date</h3><p>Like the plan? $250 with T · $100 with the crew — it comes off your tattoo. Then it's session day. <a href="#how">How it works ↓</a></p></div></div>
+  <div class="qs"><div class="num">03</div><div><h3>Deposit locks your date</h3><p>Like the plan? $200 with T · $100 with the crew — it comes off your tattoo. Then it's session day. <a href="#how">How it works ↓</a></p></div></div>
 </div></div>
 
 <!-- TODAY AT THE SHOP — same-day strip: honest, driven by the real hours.
@@ -810,7 +822,7 @@ section[id]{scroll-margin-top:70px}
   <div class="steps">
     <article class="step"><div class="num">01</div><h3>Walk In &amp; Talk It Out — Right Then</h3><p>This is the consult — it happens during this visit, not some other day. Bring your references — screenshots are fine — show us the spot, talk size and style. We'll tell you straight what will work, what won't heal well, and what we'd do instead.</p></article>
     <article class="step"><div class="num">02</div><h3>Get a Real Number</h3><p>You get a price range + rough time, in person, for your exact piece. We don't quote by phone, DM or form — not to be difficult, it's because size, placement and detail change everything, and a blind quote is a guess. In person takes ten minutes and it's honest.</p></article>
-    <article class="step"><div class="num">03</div><h3>Decide Like an Adult</h3><p>Like the plan? A deposit locks your date ($250 with T · $100 with the crew — it comes off your tattoo). Still deciding? Go home and think. The consult was free either way.</p></article>
+    <article class="step"><div class="num">03</div><h3>Decide Like an Adult</h3><p>Like the plan? A deposit locks your date ($200 with T · $100 with the crew — it comes off your tattoo). Still deciding? Go home and think. The consult was free either way.</p></article>
     <article class="step"><div class="num">04</div><h3>Session Day</h3><p>Show up, get tattooed, leave with aftercare straight from your artist — not a printout. Big pieces run in sessions, planned up front so there are no surprises. One practical thing: bring a valid photo ID on appointment day — Florida rules, and it keeps check-in to about thirty seconds.</p></article>
   </div>
   <div class="sec-cta"><a class="btn btn-red" href="#visit">Just Walk In — See Hours</a><a class="btn btn-ghost" href="#book">Or Book Ahead</a><a class="btn btn-ghost" href="sms:+18132303544">Or Just Text Us — (813) 230-3544</a></div>
@@ -933,16 +945,16 @@ section[id]{scroll-margin-top:70px}
   <!-- Shop feed slot sits above the filters (data-feed-slot="shop"): when the @9linetattoo feedId is set in INSTAGRAM_FEEDS at live hosting, the live shop feed renders there and this curated grid steps aside. Per-artist feeds live on each artist page. -->
   <div class="ppanel" data-panel="justin">
     <span class="pill">New to 9 Line · Now Booking</span>
-    <h3>Justin Giacobbi — portfolio lands here at launch</h3><p class="role">Neo-traditional · Neo-trad color · @xjgtattoosx</p>
-    <p>Justin's joining the 9 Line Tattoo® crew — U.S. Coast Guard veteran, neo-traditional and neo-trad color specialist, and his books are always open. He hasn't tattooed his first 9 Line piece yet, so there's nothing of his to show here today — his full portfolio lives on his Instagram, and his feed takes over this tab the day the site launches.</p>
+    <h3>Justin Giacobbi — his portfolio lives on Instagram</h3><p class="role">Neo-traditional · Neo-trad color · @xjgtattoosx</p>
+    <p>Justin's joining the 9 Line Tattoo® crew — U.S. Coast Guard veteran, neo-traditional and neo-trad color specialist, and his books are always open. He hasn't tattooed his first 9 Line piece yet, so there's nothing of his to show here today — his full portfolio lives on his Instagram, and new 9 Line pieces land here as they come.</p>
     <div class="row-btns">
       <a class="btn btn-red btn-sm" href="#book" data-bookfor="Justin Giacobbi">Book with Justin</a>
       <a class="btn btn-ghost btn-sm" href="https://www.instagram.com/xjgtattoosx" target="_blank" rel="noopener">See his work on Instagram ↗</a>
     </div>
   </div>
   <div class="ppanel" data-panel="ricardo">
-    <h3>Ricardo — portfolio lands here at launch</h3><p class="role">Black &amp; grey · Color · @crwn_d_king</p>
-    <p>Ricardo's recent posts are all reels, so there's no clean finished-piece photo of his to show here yet — his stills take over this tab when his feed connects at launch. Catch his latest work on IG, then bring your favorite in for a free consult.</p>
+    <h3>Ricardo — his latest work lives on Instagram</h3><p class="role">Black &amp; grey · Color · @crwn_d_king</p>
+    <p>Ricardo's recent posts are all reels, so there's no clean finished-piece photo of his to show here yet — his latest work lives on his Instagram. Catch it there, then bring your favorite in for a free consult.</p>
     <div class="row-btns">
       <a class="btn btn-red btn-sm" href="#book">Book a Free Consult</a>
       <a class="btn btn-ghost btn-sm" href="https://www.instagram.com/crwn_d_king" target="_blank" rel="noopener">See his work on Instagram ↗</a>
@@ -1000,11 +1012,11 @@ section[id]{scroll-margin-top:70px}
   <div class="sec-head"><p class="kicker">Who's tattooing</p><h2>Pick your person — or let us match you</h2><p>T runs Brandon. The Riverview crew rotates through, so ask who's in when you book. And if you're staring at this list with no clue who fits your idea — that's fine. Come in for a free consult and we'll match you to the right chair. People do it every week.</p></div>
   <div class="artists">
     <article class="artist featured">
-      <span class="pill">Booking Dec / Jan</span>
+      <span class="pill">Booking Jan / Feb</span>
       <h3>T — Owner / Artist</h3><p class="role">Black &amp; grey realism · Sleeves · Cover-ups · Portraits</p>
       <p>U.S. Army, 82nd Airborne Division, 1-505 PIR, Iraq combat veteran. Large-scale custom work is his lane — full legs, backs and sleeves in black &amp; grey realism. Based in Brandon.</p>
       <p style="color:var(--ink)">If it belongs in a museum of war gods and chiefs, it's probably his chair.</p>
-      <p>Deposit with T: <strong style="color:var(--ink)">$250</strong> · Portfolio: <a class="ig" href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener">@artravieso_tattoo</a></p>
+      <p>Deposit with T: <strong style="color:var(--ink)">$200</strong> · Portfolio: <a class="ig" href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener">@artravieso_tattoo</a></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-red btn-sm" href="#book" data-bookartist="t">Book a Consult with T</a><a class="btn btn-ghost btn-sm" href="#artist-t">View Profile &amp; Portfolio →</a></div>
       <a class="view-profile-link" href="https://shop9linetattoo.com" target="_blank" rel="noopener" data-merch-link="t">Shop T's line on the shop ↗</a>
     </article>
@@ -1076,14 +1088,14 @@ section[id]{scroll-margin-top:70px}
     <a class="ap-back" href="#artists">← Back to All Artists</a>
     <div class="ap-head">
       <div>
-        <span class="pill">Booking Dec / Jan</span>
+        <span class="pill">Booking Jan / Feb</span>
         <h2>T — Owner / Artist</h2>
         <p class="role" style="color:var(--accent);font-weight:700">Black &amp; grey realism · Sleeves · Cover-ups · Portraits</p>
         <p class="ap-meta">Founder of 9 Line Tattoo® and the artist leading Brandon. Veteran-owned — U.S. Army, 82nd Airborne Division, 1-505 PIR, Iraq combat veteran. His lane is large-scale black &amp; grey realism: portraits, sleeves, legs and backs planned as one piece and tattooed in sessions. If it belongs in a museum of war gods and chiefs, it's probably his chair. And no, he won't quote it over the phone — come in, talk it out, get a real price range at a free consult. That's the deal, and it's a fair one.</p>
-        <p class="ap-meta" style="margin-top:12px"><strong>Base:</strong> Brandon — lead artist &nbsp;·&nbsp; <strong>Deposit:</strong> $250 &nbsp;·&nbsp; <strong>Instagram:</strong> <a href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">@artravieso_tattoo</a></p>
+        <p class="ap-meta" style="margin-top:12px"><strong>Base:</strong> Brandon — lead artist &nbsp;·&nbsp; <strong>Deposit:</strong> $200 &nbsp;·&nbsp; <strong>Instagram:</strong> <a href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">@artravieso_tattoo</a></p>
         <div class="ap-actions"><a class="btn btn-red" href="#book" data-bookartist="t">Book with T →</a><a class="btn btn-ghost" href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener">Instagram ↗</a></div>
       </div>
-      <figure class="ap-cover" style="margin:0"><img width="1320" height="1980" src="assets/hero-t-chief-wolf-rib.jpg" alt="Indian chief rib panel by T — black and grey realism tattoo of a chief wearing a wolf headdress, rib and torso"><figcaption>Lead piece — Indian chief rib panel <span>· Black &amp; grey realism · Rib / torso</span></figcaption></figure>
+      <figure class="ap-cover" style="margin:0"><img width="1320" height="1980" loading="lazy" decoding="async" src="assets/hero-t-chief-wolf-rib.jpg" alt="Indian chief rib panel by T — black and grey realism tattoo of a chief wearing a wolf headdress, rib and torso"><figcaption>Lead piece — Indian chief rib panel <span>· Black &amp; grey realism · Rib / torso</span></figcaption></figure>
     </div>
     <h3 class="ap-section-title">Featured Piece</h3>
     <a class="ap-feature" href="https://www.instagram.com/artravieso_tattoo" target="_blank" rel="noopener"><img width="1080" height="1350" loading="lazy" decoding="async" src="assets/work-t-demon.jpg" alt="Demon full back piece tattoo by T — finished black and grey realism"><span class="ap-feature-cap">Finished piece — Demon full back <span>· Black &amp; grey realism · Full back</span></span></a>
@@ -1135,14 +1147,14 @@ section[id]{scroll-margin-top:70px}
         <p class="ap-meta" style="margin-top:12px"><strong>Base:</strong> Riverview — co-lead &nbsp;·&nbsp; <strong>Deposit:</strong> $100 &nbsp;·&nbsp; <strong>Instagram:</strong> <a href="https://www.instagram.com/xjgtattoosx" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">@xjgtattoosx</a></p>
         <div class="ap-actions"><a class="btn btn-red" href="#book" data-bookartist="justin">Book with Justin →</a><a class="btn btn-ghost" href="https://www.instagram.com/xjgtattoosx" target="_blank" rel="noopener">Instagram ↗</a></div>
       </div>
-      <div class="ap-cover" style="display:flex;align-items:center;justify-content:center;padding:28px;background:var(--bg2)"><p style="color:var(--muted);text-align:center;margin:0"><strong style="color:var(--ink);display:block;font-size:19px;margin-bottom:8px">Portfolio on Instagram</strong>Justin's full portfolio lives at @xjgtattoosx — his feed takes over this page when the live feed connects at launch.</p></div>
+      <div class="ap-cover" style="display:flex;align-items:center;justify-content:center;padding:28px;background:var(--bg2)"><p style="color:var(--muted);text-align:center;margin:0"><strong style="color:var(--ink);display:block;font-size:19px;margin-bottom:8px">Portfolio on Instagram</strong>Justin's full portfolio lives at @xjgtattoosx — new 9 Line pieces land here as they come.</p></div>
     </div>
     <h3 class="ap-section-title">Portfolio — Justin Giacobbi</h3>
     <p class="ig-zone-label">Instagram feed · <a href="https://www.instagram.com/xjgtattoosx" target="_blank" rel="noopener">@xjgtattoosx</a></p>
     <div class="ig-feed-slot" data-feed-slot="justin" hidden></div>
     <div data-feed-fallback="justin">
     <div class="ppanel show" style="margin-top:0">
-      <h3>His 9 Line portfolio lands here at launch</h3>
+      <h3>His 9 Line pieces land here as they come</h3>
       <p>Justin hasn't tattooed his first 9 Line piece yet, so there's nothing of his to show here today — and we're not filling his page with anyone else's work. See his real portfolio on Instagram, then book him here.</p>
       <div class="row-btns"><a class="btn btn-red btn-sm" href="#book" data-bookartist="justin">Book with Justin</a><a class="btn btn-ghost btn-sm" href="https://www.instagram.com/xjgtattoosx" target="_blank" rel="noopener">See his work on Instagram ↗</a></div>
     </div>
@@ -1153,7 +1165,7 @@ section[id]{scroll-margin-top:70px}
     </div>
     <div class="merch-block">
       <h3>Support Justin — his line is dropping soon</h3>
-      <p>Justin's artist-line shirt is designed — horned mask, roses and lantern back print with a pocket logo — but his Shopify listing isn't live yet, so there's no buy link to a shirt that isn't on sale. When it drops, buying his shirt will support him directly — every artist line puts money straight in the artist's pocket. Until then, shop the full store — gift cards and shop gear are live now.</p>
+      <p>Justin's artist-line shirt is designed — horned mask, roses and lantern back print with a pocket logo — but his Shopify listing isn't live yet, so there's no buy link to a shirt that isn't on sale. When it drops, buying his shirt will support him directly — every artist line puts money straight in the artist's pocket. Until then, shop the full store — shop gear is live now.</p>
       <a class="btn btn-red" href="https://shop9linetattoo.com" target="_blank" rel="noopener">Shop the Store ↗</a>
       <span class="fine" style="margin-left:10px">Justin's line: dropping soon — watch @xjgtattoosx and @9linetattoo</span>
     </div>
@@ -1212,15 +1224,15 @@ section[id]{scroll-margin-top:70px}
         <p class="ap-meta" style="margin-top:12px"><strong>Base:</strong> Riverview &nbsp;·&nbsp; <strong>Deposit:</strong> $100 &nbsp;·&nbsp; <strong>Instagram:</strong> <a href="https://www.instagram.com/crwn_d_king" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">@crwn_d_king</a></p>
         <div class="ap-actions"><a class="btn btn-red" href="#book" data-bookartist="ricardo">Book with Ricardo →</a><a class="btn btn-ghost" href="https://www.instagram.com/crwn_d_king" target="_blank" rel="noopener">Instagram ↗</a></div>
       </div>
-      <div class="ap-cover" style="display:flex;align-items:center;justify-content:center;padding:28px;background:var(--bg2)"><p style="color:var(--muted);text-align:center;margin:0"><strong style="color:var(--ink);display:block;font-size:19px;margin-bottom:8px">Portfolio on Instagram</strong>Ricardo's latest work lives at @crwn_d_king — his feed takes over this page when the live feed connects at launch.</p></div>
+      <div class="ap-cover" style="display:flex;align-items:center;justify-content:center;padding:28px;background:var(--bg2)"><p style="color:var(--muted);text-align:center;margin:0"><strong style="color:var(--ink);display:block;font-size:19px;margin-bottom:8px">Portfolio on Instagram</strong>Ricardo's latest work lives at @crwn_d_king — new finished pieces land here as they come.</p></div>
     </div>
     <h3 class="ap-section-title">Portfolio — Ricardo</h3>
     <p class="ig-zone-label">Instagram feed · <a href="https://www.instagram.com/crwn_d_king" target="_blank" rel="noopener">@crwn_d_king</a></p>
     <div class="ig-feed-slot" data-feed-slot="ricardo" hidden></div>
     <div data-feed-fallback="ricardo">
     <div class="ppanel show" style="margin-top:0">
-      <h3>His portfolio lands here at launch</h3>
-      <p>Ricardo's recent posts are all reels, so there's no clean finished-piece photo of his to show here yet — his stills take over this tab when his feed connects at launch. Catch his latest work on IG, then bring your favorite in for a free consult.</p>
+      <h3>His finished pieces land here as they come</h3>
+      <p>Ricardo's recent posts are all reels, so there's no clean finished-piece photo of his to show here yet — his latest work lives on his Instagram. Catch it there, then bring your favorite in for a free consult.</p>
       <div class="row-btns"><a class="btn btn-red btn-sm" href="#book" data-bookartist="ricardo">Book with Ricardo</a><a class="btn btn-ghost btn-sm" href="https://www.instagram.com/crwn_d_king" target="_blank" rel="noopener">See his work on Instagram ↗</a></div>
     </div>
     </div><!-- /Ricardo feed fallback -->
@@ -1297,7 +1309,7 @@ section[id]{scroll-margin-top:70px}
       <h3>Okay — but what does it cost?</h3>
       <p style="color:var(--stone-text);margin-top:0">Fair question, and here's the honest answer: nobody can price a tattoo off a photo. Size, placement, detail and drawing time move the number a lot — that's why we don't quote by phone or DM, and why anybody who does is guessing with your money. Come in for a free consult and you get a <strong style="color:var(--ink)">real price range + rough time</strong> for your exact piece. Good work isn't cheap, and you don't want cheap on your body — but you'll know your number before you commit to anything.</p>
       <div class="price-row"><span>Consult — talk it out, get your range</span><b>FREE</b></div>
-      <div class="price-row"><span>Deposit — with T</span><b>$250</b></div>
+      <div class="price-row"><span>Deposit — with T</span><b>$200</b></div>
       <div class="price-row"><span>Deposit — with the crew</span><b>$100</b></div>
       <div class="price-row"><span>Big pieces (sleeves, legs, backs)</span><b>By the session</b></div>
       <p class="fine">About deposits, so there's no weirdness: they're nonrefundable because they lock your artist's whole day for you — that chair sits empty for anyone else, and the drawing starts before you arrive. Your deposit comes off the price of your tattoo. Life happens: reschedules are fine, up to two. A no-show with no word? We're done — that's the one hard rule.</p>
@@ -1317,7 +1329,7 @@ section[id]{scroll-margin-top:70px}
         <div><label for="phone">Phone * — this is how we reply</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(813) 555-0123" aria-describedby="err-phone"><p class="field-err" id="err-phone">Add your phone number — that's how the shop replies to you.</p></div>
       </div>
       <div class="row">
-        <div><label for="artist">Artist preference</label><select id="artist" name="artist"><option value="">No preference — match me</option><option>T (Booking Dec/Jan)</option><option>Justin Giacobbi</option><option>Daniella Foster</option><option>Ricardo</option><option>Matt Eckenroth</option><option>Crew / soonest available</option></select></div>
+        <div><label for="artist">Artist preference</label><select id="artist" name="artist"><option value="">No preference — match me</option><option>T (Booking Jan/Feb)</option><option>Justin Giacobbi</option><option>Daniella Foster</option><option>Ricardo</option><option>Matt Eckenroth</option><option>Crew / soonest available</option></select></div>
         <div><label for="style">Style</label><select id="style" name="style"><option value="">Pick a style</option><option>Black &amp; Grey Realism</option><option>Sleeve / Large-Scale</option><option>Cover-Up</option><option>Fine Line</option><option>Color</option><option>Portrait / Memorial</option><option>Not sure yet</option></select></div>
       </div>
       <div class="row">
@@ -1358,15 +1370,15 @@ section[id]{scroll-margin-top:70px}
   </div>
 </div></section>
 
-<!-- EVENTS — dated and real: Friday the 13th flash + Black Friday gift cards. No fake countdowns. -->
+<!-- EVENTS — dated and real: Black Friday gift cards + evergreen walk-ins. No fake countdowns. -->
 <section style="background:var(--bone);color:var(--ink)"><div class="wrap">
   <div class="sec-head"><p class="kicker" style="color:var(--accent-dark)">Coming up — put it on the calendar</p><h2>Two reasons to swing by soon</h2></div>
   <div class="two">
     <div class="panel" style="background:var(--card-lt);border-color:var(--line-lt)">
-      <span class="pill">Fri · Nov 13</span>
-      <h3>Friday the 13th Flash Day</h3>
-      <p style="color:var(--stone-text)">Our flash wall, one day only: <strong style="color:var(--ink)">$31 + $9 tip</strong> designs and <strong style="color:var(--ink)">$131 + $9 tip</strong> designs — tattoos only. First come, first served, arms and legs fill up fast. Come early, pick your piece off the wall, get in a chair. This is the most fun day on a tattoo shop's calendar — even if you just want to come watch.</p>
-      <div class="sec-cta"><a class="btn btn-red" href="sms:+18132303544">Text Us About Flash Day</a></div>
+      <span class="pill">Every Day We're Open</span>
+      <h3>Walk-ins Welcome</h3>
+      <p style="color:var(--stone-text)">No appointment, no problem. Chairs open most days, first come, first served — walk in, look around, and we'll do your consult on the spot. Want a tattoo today too? If a chair's open, it's yours. Not sure who's in before you drive over? <strong style="color:var(--ink)">Text (813) 230-3544</strong> and we'll tell you straight.</p>
+      <div class="sec-cta"><a class="btn btn-red" href="sms:+18132303544">Text Us — Who's In Today?</a></div>
     </div>
     <div class="panel" style="background:var(--card-lt);border-color:var(--line-lt)">
       <span class="pill">Fri Nov 27 → Mon Nov 30</span>
@@ -1418,7 +1430,7 @@ section[id]{scroll-margin-top:70px}
   <details><summary>Can I just walk in today?</summary><p>Yes — that's the move, honestly. Walk in, look around, and we handle the rest right then: the consult happens during your visit, no appointment needed. Want a tattoo today too? Walk-in chairs open up most days, first come, first served. Want to know who's in before you drive over? Text us at (813) 230-3544 and we'll tell you straight.</p></details>
   <details><summary>Do I need an appointment for a consult?</summary><p>Nope. Consults are walk-in — come in during shop hours, look around, and we sit down and talk your piece out right then. Free, about 15–20 minutes, and you leave with a real price range. If you'd rather have a set time, book ahead with the form or a text — but you never have to.</p></details>
   <details><summary>Can you cover up this thing I regret?</summary><p>Usually, yes — but it depends on how dark and dense the old piece is, and anybody who promises sight-unseen is lying to you. Bring it in. We'll look at it in person and tell you honestly what will actually cover it, before you spend a dollar.</p></details>
-  <details><summary>Why do you need a deposit? Is it a scam thing?</summary><p>Not a scam thing — a calendar thing. Your deposit ($250 with T, $100 with the crew) locks your artist's whole day to you: that chair turns everyone else away, and your design gets drawn before you arrive. It's nonrefundable because of that, and it comes straight off the price of your tattoo — it's not extra. Reschedule if life happens (up to two times, no drama). Just ghost us with no word? Then we're done — that's the one rule we don't bend.</p></details>
+  <details><summary>Why do you need a deposit? Is it a scam thing?</summary><p>Not a scam thing — a calendar thing. Your deposit ($200 with T, $100 with the crew) locks your artist's whole day to you: that chair turns everyone else away, and your design gets drawn before you arrive. It's nonrefundable because of that, and it comes straight off the price of your tattoo — it's not extra. Reschedule if life happens (up to two times, no drama). Just ghost us with no word? Then we're done — that's the one rule we don't bend.</p></details>
   <details><summary>Can I bring somebody with me?</summary><p>Of course — bring your person. Moral support is half the fun of a consult, and for a first tattoo it settles the nerves. Just know the chair area stays work-focused on session day, and your artist makes the final call on space.</p></details>
   <details><summary>Will I see my design before tattoo day?</summary><p>Yes — your artist draws it custom for you, and you'll go over it together. It's your skin; there are no surprise reveals here.</p></details>
   <details><summary>How old do I have to be? What ID?</summary><p>Bring a valid government photo ID — you'll need it. Florida rules apply, and we'll confirm exactly what's needed for your age and your piece when you book.</p></details>
@@ -1505,12 +1517,12 @@ section[id]{scroll-margin-top:70px}
   </div>
 </div>
 
-<!-- Sticky mobile bar -->
+<!-- Sticky mobile bar — three big tap targets: Call / Text / Free Consult.
+     Directions lives in the hero, the Today strip, and Visit. -->
 <nav class="mobilebar" aria-label="Quick actions">
   <a href="tel:+18132303544"><span>📞</span>Call</a>
   <a href="sms:+18132303544"><span>💬</span>Text</a>
-  <a class="primary" href="#book"><span>✦</span>Book Consult</a>
-  <a href="https://www.google.com/maps/dir/?api=1&destination=315+S+Parsons+Ave,+Brandon,+FL+33511" target="_blank" rel="noopener"><span>📍</span>Directions</a>
+  <a class="primary" href="#book"><span>✦</span>Free Consult</a>
 </nav>
 
 <script>
@@ -1822,7 +1834,7 @@ function updatePgridCount(){
   var tiles = document.querySelectorAll('#pgrid .ptile');
   var shown = 0; tiles.forEach(function(t){ if(!t.classList.contains('hidden')) shown++; });
   if(shown===0 && activeStyle==='all' && activePlace==='all' && (activeArtist==='justin' || activeArtist==='ricardo')){
-    el.textContent = (activeArtist==='justin' ? "Justin's" : "Ricardo's") + ' portfolio lands here at launch — the panel right below has their booking and Instagram.';
+    el.textContent = (activeArtist==='justin' ? "Justin's" : "Ricardo's") + ' portfolio lives on Instagram for now — the panel right below has their booking and Instagram.';
     return;
   }
   var bits = [];
@@ -1842,7 +1854,7 @@ var lbMedia = document.getElementById('lbMedia'), lbName = document.getElementBy
     lbHandle = document.getElementById('lbHandle'), lbCap = document.getElementById('lbCap'),
     lbBook = document.getElementById('lbBook'), lbIg = document.getElementById('lbIg'),
     lbMore = document.getElementById('lbMore');
-var BOOK_OPTION = { t:'T (Booking Dec/Jan)', justin:'Justin Giacobbi', elexus:'Daniella Foster', ricardo:'Ricardo', matt:'Matt Eckenroth' };
+var BOOK_OPTION = { t:'T (Booking Jan/Feb)', justin:'Justin Giacobbi', elexus:'Daniella Foster', ricardo:'Ricardo', matt:'Matt Eckenroth' };
 function setArtistPref(key){
   var sel = document.getElementById('artist');
   var want = BOOK_OPTION[key];
